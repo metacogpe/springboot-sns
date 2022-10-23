@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     // todo : implement
-    public User join() {
+    public User join(String userName, String password) {
+      
         return new User();
     }
 

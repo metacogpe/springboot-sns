@@ -41,7 +41,7 @@ public class UserControllerTest {
 
         // todo : mocking
         // 회원가입시 User 클래스 반환 : User model 정의 필요
-        when(userService.join()).thenReturn(mock(User.class));
+        when(userService.join(userName, password)).thenReturn(mock(User.class));
 
         mockMvc.perform(post("/api/v1/users/join")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -57,7 +57,7 @@ public class UserControllerTest {
         String password = "password";
 
         // todo : mocking
-        when(userService.join()).thenThrow(new SnsApplicationException());
+        when(userService.join(userName, password)).thenThrow(new SnsApplicationException());
 
         mockMvc.perform(post("/api/v1/users/join")
                         .contentType(MediaType.APPLICATION_JSON)

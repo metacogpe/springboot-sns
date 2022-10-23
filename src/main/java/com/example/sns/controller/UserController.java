@@ -16,6 +16,6 @@ public class UserController {
     @PostMapping
     public void join() {
         // join
-        userService.join();   // 불러온 userService의 join() 사용 가능
+        userService.join("", "");   // 불러온 userService의 join() 사용 가능
     }
 }
