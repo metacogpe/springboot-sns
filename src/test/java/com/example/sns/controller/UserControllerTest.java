@@ -1,6 +1,7 @@
 package com.example.sns.controller;
 
 import com.example.sns.controller.request.UserJoinRequest;
+import com.example.sns.controller.request.UserLoginRequest;
 import com.example.sns.exception.SnsApplicationException;
 import com.example.sns.model.User;
 import com.example.sns.service.UserService;
@@ -65,4 +66,56 @@ public class UserControllerTest {
                 ).andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isConflict());   // 회원이 존재하므로 Conflict 상태 처리
     }
+
+    @Test
+    public void 로그인() throws Exception {
+        String userName = "userName";
+        String password = "password";
+
+        // todo : mocking
+        // 회원가입시 User 클래스 반환 : User model 정의 필요
+        when(userService.login()).thenReturn("test_token");
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        // todo : add request body (ObjectMapper 사용)
+                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest(userName, password)))
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());   // 회원가입 성공의 경우
+    }
+
+    @Test
+    public void 로그인시_미가입_userName_입력경우_에러반환() throws Exception {
+        String userName = "userName";
+        String password = "password";
+
+        // todo : mocking
+        // 회원가입시 User 클래스 반환 : User model 정의 필요
+        when(userService.login()).thenThrow(new SnsApplicationException());
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        // todo : add request body (ObjectMapper 사용)
+                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest(userName, password)))
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isNotFound());   // 미가입 회원
+    }
+
+    @Test
+    public void 로그인시_틀린_password_입력경우_에러반환() throws Exception {
+        String userName = "userName";
+        String password = "password";
+
+        // todo : mocking
+        // 회원가입시 User 클래스 반환 : User model 정의 필요
+        when(userService.login()).thenThrow(new SnsApplicationException());
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        // todo : add request body (ObjectMapper 사용)
+                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest(userName, password)))
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isUnauthorized());   // 인증 실패 : 패스워드 오류
+    }
+
 }
