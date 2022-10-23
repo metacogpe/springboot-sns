@@ -1,16 +1,22 @@
 package com.example.sns.controller;
 
 import com.example.sns.controller.request.UserJoinRequest;
+import com.example.sns.exception.SnsApplicationException;
+import com.example.sns.model.User;
+import com.example.sns.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,12 +30,17 @@ public class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper; //오브젝트 맵퍼로 UserJoinRequest(body내용)을 가져옴
 
+    @MockBean
+    private UserService userService; // 회원가입(join())테스트를 위해 UserService 가져오기, 아래의 mocking 에서 사용
+
     @Test
     public void 회원가입() throws Exception {
         String userName = "userName";
         String password = "password";
 
         // todo : mocking
+        // 회원가입시 User 클래스 반환 : User model 정의 필요
+        when(userService.join()).thenReturn(mock(User.class));
 
         mockMvc.perform(post("/api/v1/users/join")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -45,6 +56,8 @@ public class UserControllerTest {
         String password = "password";
 
         // todo : mocking
+        when(userService.join()).thenThrow(new SnsApplicationException());
+
         mockMvc.perform(post("/api/v1/users/join")
                         .contentType(MediaType.APPLICATION_JSON)
                         // todo : add request body
