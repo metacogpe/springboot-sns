@@ -58,5 +58,5 @@ public class UserServiceTest {
         // mocking
         Assertions.assertDoesNotThrow(()-> userService.login(userName, password));  // 정상 로그인의 경우 Throw 미발생
     }
-    
+
 }

@@ -74,7 +74,7 @@ public class UserControllerTest {
 
         // todo : mocking
         // 회원가입시 User 클래스 반환 : User model 정의 필요
-        when(userService.login()).thenReturn("test_token");
+        when(userService.login(userName, password)).thenReturn("test_token");
 
         mockMvc.perform(post("/api/v1/users/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -91,7 +91,7 @@ public class UserControllerTest {
 
         // todo : mocking
         // 회원가입시 User 클래스 반환 : User model 정의 필요
-        when(userService.login()).thenThrow(new SnsApplicationException());
+        when(userService.login(userName, password)).thenThrow(new SnsApplicationException());
 
         mockMvc.perform(post("/api/v1/users/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -108,7 +108,7 @@ public class UserControllerTest {
 
         // todo : mocking
         // 회원가입시 User 클래스 반환 : User model 정의 필요
-        when(userService.login()).thenThrow(new SnsApplicationException());
+        when(userService.login(userName, password)).thenThrow(new SnsApplicationException());
 
         mockMvc.perform(post("/api/v1/users/login")
                         .contentType(MediaType.APPLICATION_JSON)

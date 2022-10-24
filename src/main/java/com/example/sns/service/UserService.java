@@ -26,7 +26,7 @@ public class UserService {
 
     // login 의 경우, jwt 사용하므로 암호화된 문자열인 String 으로 리턴
     // todo : implement
-    public String login() {
+    public String login(String userName, String password) {
         return "";
     }
 }
