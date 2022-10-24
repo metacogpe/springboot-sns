@@ -49,4 +49,14 @@ public class UserServiceTest {
         // 조인을 했을 때, exception 반환 필요
         Assertions.assertThrows(SnsApplicationException.class, ()-> userService.join(userName, password));
     }
+
+    @Test
+    void 로그인_정상적으로_동작하는_경우() {
+        String userName = "userName";
+        String password = "password";
+
+        // mocking
+        Assertions.assertDoesNotThrow(()-> userService.login(userName, password));  // 정상 로그인의 경우 Throw 미발생
+    }
+    
 }
