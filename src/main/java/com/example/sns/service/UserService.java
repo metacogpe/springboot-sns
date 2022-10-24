@@ -1,10 +1,15 @@
 package com.example.sns.service;
 
 import com.example.sns.model.User;
+import com.example.sns.repository.UserEntityRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
+
+    private final UserEntityRepository userEntityRepository;
 
     // todo : implement
     public User join(String userName, String password) {
