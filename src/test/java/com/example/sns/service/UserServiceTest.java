@@ -16,7 +16,7 @@ public class UserServiceTest {
         String userName = "userName";
         String password = "password";
 
-        // moking
+        // mocking : 회원가입 정상 여부 목킹 필요 -> UserService.java 에서 좀 더 구현 필요
         Assertions.assertDoesNotThrow(()-> userService.join(userName, password));
     }
 }
