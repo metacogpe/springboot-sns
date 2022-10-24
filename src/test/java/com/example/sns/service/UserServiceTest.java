@@ -56,6 +56,7 @@ public class UserServiceTest {
         String password = "password";
 
         // mocking
+
         Assertions.assertDoesNotThrow(()-> userService.login(userName, password));  // 정상 로그인의 경우 Throw 미발생
     }
 
