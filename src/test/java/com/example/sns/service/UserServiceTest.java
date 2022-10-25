@@ -64,4 +64,13 @@ public class UserServiceTest {
         Assertions.assertDoesNotThrow(()-> userService.login(userName, password));  // 정상 로그인의 경우 Throw 미발생
     }
 
+    @Test
+    void 로그인_userName으로_회원가입한_유저가_없는_경우() {
+        String userName = "userName";
+        String password = "password";
+
+        // mocking
+        when(userEntityRepository.findByUsername(userName)).thenReturn(Optional.empty()); // 없는 경우라서 empty() 리턴
+        Assertions.assertThrows(SnsApplicationException.class, () -> userService.login(userName,password)); // 로그인 실패로 예외 throw 발생
+    }
 }
