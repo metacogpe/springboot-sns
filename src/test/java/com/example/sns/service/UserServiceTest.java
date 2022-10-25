@@ -73,4 +73,17 @@ public class UserServiceTest {
         when(userEntityRepository.findByUsername(userName)).thenReturn(Optional.empty()); // 없는 경우라서 empty() 리턴
         Assertions.assertThrows(SnsApplicationException.class, () -> userService.login(userName,password)); // 로그인 실패로 예외 throw 발생
     }
+
+    @Test
+    void 로그인시_패스워드가_틀린_경우() {
+        String userName = "userName";
+        String password = "password";
+        String wrongPassword = "wrongPassword";
+
+        UserEntity fixture = UserEntityFixture.get(userName,password);
+
+        // mocking
+        when(userEntityRepository.findByUsername(userName)).thenReturn(Optional.of(fixture)); // 회원이 있는 경우라서 Fixture 반환
+        Assertions.assertThrows(SnsApplicationException.class, () -> userService.login(userName,wrongPassword)); // 패스워드 오류로 예외 throw 발생
+    }
 }
