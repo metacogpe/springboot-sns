@@ -41,10 +41,11 @@ public class UserServiceTest {
     void 회원가입시_userName으로_회원가입한_유저가_이미_있는_경우() {
         String userName = "userName";
         String password = "password";
+        UserEntity fixture = UserEntityFixture.get(userName,password);
 
         // mocking
         // 유저가 반환되어야 함 : Optional.of
-        when(userEntityRepository.findByUsername(userName)).thenReturn(Optional.of(mock(UserEntity.class)));  // 회원정보 있는 상태
+        when(userEntityRepository.findByUsername(userName)).thenReturn(Optional.of(fixture));  // 회원정보 있는 상태
         when(userEntityRepository.save(any())).thenReturn(Optional.of(mock(UserEntity.class)));  // 저장 후 리턴시 UserEntity 목킹을 반환
 
         // 조인을 했을 때, exception 반환 필요
