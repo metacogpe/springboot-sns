@@ -32,7 +32,7 @@ public class UserServiceTest {
 
         // mocking : 회원가입 정상 여부 목킹 필요 -> UserService.java 에서 좀 더 구현 필요
         when(userEntityRepository.findByUsername(userName)).thenReturn(Optional.empty());  // 회원정보 없는 상태
-        when(userEntityRepository.save(any())).thenReturn(Optional.of(mock(UserEntity.class)));  // 저장 후 리턴시 UserEntity 목킹을 반환
+        when(userEntityRepository.save(any())).thenReturn(Optional.of(UserEntityFixture.get(userName,password)));  // 저장 후 리턴시 UserEntity 목킹을 반환 -> Fixture 적용으로 변경
         // 회원가입 정상 가입일 경우 위의 2가지 경우로 테스트 가능
         Assertions.assertDoesNotThrow(()-> userService.join(userName, password));
     }
