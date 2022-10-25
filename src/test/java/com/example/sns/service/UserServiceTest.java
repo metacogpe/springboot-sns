@@ -46,7 +46,7 @@ public class UserServiceTest {
         // mocking
         // 유저가 반환되어야 함 : Optional.of
         when(userEntityRepository.findByUsername(userName)).thenReturn(Optional.of(fixture));  // 회원정보 있는 상태
-        when(userEntityRepository.save(any())).thenReturn(Optional.of(mock(UserEntity.class)));  // 저장 후 리턴시 UserEntity 목킹을 반환
+        when(userEntityRepository.save(any())).thenReturn(Optional.of(fixture));  // 저장 후 리턴시 UserEntity 목킹을 반환 -> fixture로 변경
 
         // 조인을 했을 때, exception 반환 필요
         Assertions.assertThrows(SnsApplicationException.class, ()-> userService.join(userName, password));
