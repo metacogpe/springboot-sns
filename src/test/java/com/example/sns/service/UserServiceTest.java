@@ -1,6 +1,7 @@
 package com.example.sns.service;
 
 import com.example.sns.exception.SnsApplicationException;
+import com.example.sns.fixture.UserEntityFixture;
 import com.example.sns.model.entity.UserEntity;
 import com.example.sns.repository.UserEntityRepository;
 import org.junit.jupiter.api.Assertions;
@@ -55,8 +56,10 @@ public class UserServiceTest {
         String userName = "userName";
         String password = "password";
 
-        // mocking
+        UserEntity fixture = UserEntityFixture.get(userName,password);
 
+        // mocking
+        when(userEntityRepository.findByUsername(userName)).thenReturn(Optional.of(fixture));
         Assertions.assertDoesNotThrow(()-> userService.login(userName, password));  // 정상 로그인의 경우 Throw 미발생
     }
 
