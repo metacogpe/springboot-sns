@@ -1,5 +1,6 @@
 package com.example.sns.model.entity;
 
+import com.example.sns.model.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -29,8 +30,9 @@ public class UserEntity {
     private String password;
 
     @Column(name = "role")
-    private String role;
-    
+    @Enumerated(EnumType.STRING)  // enum 사용 위한 어노테이션
+    private UserRole role = UserRole.USER;  // enum 클래스 적용
+
     @Column(name = "registered_at")
     private Timestamp registeredAt;  // 생성시간 : 데이터 관리 용이성 위한 용도
 
