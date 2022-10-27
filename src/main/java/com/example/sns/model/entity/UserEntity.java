@@ -28,6 +28,9 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "role")
+    private String role;
+    
     @Column(name = "registered_at")
     private Timestamp registeredAt;  // 생성시간 : 데이터 관리 용이성 위한 용도
 
