@@ -12,7 +12,8 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "\"user\"") // PostgreSQL에 존재하는 기본 default user table 과 구분하기 위해 double quotation 추가
+// 삭제 시간 업데이트를 위해 어노테이션을 아래와 같이 구성 
 @SQLDelete(sql = "UPDATED \"user\" SET deleted_at = NOW() where id=?")  // delete sql 시 삭제시간 업데이트
 @Where(clause = "deleted_at is NULL")  // 삭제가 안된 것만 가져오도록 구현
 public class UserEntity {
