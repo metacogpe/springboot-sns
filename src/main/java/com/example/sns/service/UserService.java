@@ -26,7 +26,7 @@ public class UserService {
         // 2) 등록 : 회원가입 진행 = user 를 등록
         // userEntityRepository.save(new UserEntity());  // 생성자 실행하여 객체 만들기 : new UserEntity()
         // 위의 방식을 아래와 같이 변경 : 정의한 UserEntity 변환 메소드 적용
-        userEntityRepository.save(UserEntity.of(userName,password));  // 엔터티 변환 메소드 적용 
+        UserEntity userEntity = userEntityRepository.save(UserEntity.of(userName,password));  // 엔터티 변환 메소드 적용
         return new User();
     }
 
