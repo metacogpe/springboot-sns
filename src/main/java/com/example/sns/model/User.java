@@ -2,10 +2,12 @@ package com.example.sns.model;
 
 import com.example.sns.model.entity.UserEntity;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Timestamp;
 
+@Getter
 @AllArgsConstructor
 public class User {
 

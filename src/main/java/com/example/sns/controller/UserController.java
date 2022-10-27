@@ -1,6 +1,7 @@
 package com.example.sns.controller;
 
 import com.example.sns.controller.request.UserJoinRequest;
+import com.example.sns.controller.response.UserJoinResponse;
 import com.example.sns.model.User;
 import com.example.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,6 @@ public class UserController {
     public void join(@RequestBody UserJoinRequest request) {
         // join
         User user = userService.join(request.getUserName(), request.getPassword()); // UserJoinRequest 로 불러온 userName 과 password 를 userService 로 넘김
+        UserJoinResponse response = UserJoinResponse.fromUser(user);
     }
 }
