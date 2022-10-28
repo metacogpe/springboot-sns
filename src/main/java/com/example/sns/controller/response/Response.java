@@ -17,7 +17,7 @@ public class Response<T> {
     }
 
     //성공일 경우 사용하는 메소드
-    private static <T> Response<T> sucess(T result) {
+    private static <T> Response<T> success(T result) {
         return new Response<>("SUCCESS", result);  // 성공일 경우 result가 각가 달라 <T> 타입 리턴
     }
 }
