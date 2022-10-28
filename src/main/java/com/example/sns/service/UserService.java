@@ -1,5 +1,6 @@
 package com.example.sns.service;
 
+import com.example.sns.exception.ErrorCode;
 import com.example.sns.exception.SnsApplicationException;
 import com.example.sns.model.User;
 import com.example.sns.model.entity.UserEntity;
@@ -21,7 +22,7 @@ public class UserService {
         // 1) 체크 : 회원가입하려는 userName 으로 회원가입된 user 가 있는지
 //        Optional<UserEntity> userEntity = userEntityRepository.findByUsername(userName);  //정의한 findByUsername()함수 사용
         userEntityRepository.findByUsername(userName).ifPresent(userEntity -> {
-            throw new SnsApplicationException();
+            throw new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME,String.format("Duplicate username"));
         });
         // 2) 등록 : 회원가입 진행 = user 를 등록
         // userEntityRepository.save(new UserEntity());  // 생성자 실행하여 객체 만들기 : new UserEntity()
