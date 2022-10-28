@@ -12,12 +12,12 @@ public class Response<T> {
 
     // 성공과 실패 케이스 마다 만드는 번거로움 없애기 이휘 static 함수 정의
     // 에러인 경우 사용하는 메소드
-    private static <T> Response<Void> error(String errorCode) {
+    public static <T> Response<Void> error(String errorCode) {
         return new Response<>(errorCode, null);  // 에러일 경우 result 없이 코드만 따라서 Response<Void>
     }
 
     //성공일 경우 사용하는 메소드
-    private static <T> Response<T> success(T result) {
+    public static <T> Response<T> success(T result) {
         return new Response<>("SUCCESS", result);  // 성공일 경우 result가 각가 달라 <T> 타입 리턴
     }
 }

@@ -24,5 +24,6 @@ public class UserController {
         // join
         User user = userService.join(request.getUserName(), request.getPassword()); // UserJoinRequest 로 불러온 userName 과 password 를 userService 로 넘김
         UserJoinResponse response = UserJoinResponse.fromUser(user);
+        return Response.success(response);
     }
 }
