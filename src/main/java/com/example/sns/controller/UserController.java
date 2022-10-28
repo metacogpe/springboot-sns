@@ -1,6 +1,7 @@
 package com.example.sns.controller;
 
 import com.example.sns.controller.request.UserJoinRequest;
+import com.example.sns.controller.response.Response;
 import com.example.sns.controller.response.UserJoinResponse;
 import com.example.sns.model.User;
 import com.example.sns.service.UserService;
@@ -19,7 +20,7 @@ public class UserController {
     // todo : implement
     @PostMapping("/join")
     // UserJoinRequest 클래스에 정의된 userName 과 password 를 RequestBody 로 불러옴
-    public void join(@RequestBody UserJoinRequest request) {
+    public Response<UserJoinResponse> join(@RequestBody UserJoinRequest request) {
         // join
         User user = userService.join(request.getUserName(), request.getPassword()); // UserJoinRequest 로 불러온 userName 과 password 를 userService 로 넘김
         UserJoinResponse response = UserJoinResponse.fromUser(user);
