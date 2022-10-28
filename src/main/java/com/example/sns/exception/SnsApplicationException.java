@@ -1,8 +1,10 @@
 package com.example.sns.exception;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 // todo : implement
+@Getter
 @AllArgsConstructor
 public class SnsApplicationException extends RuntimeException {
 
