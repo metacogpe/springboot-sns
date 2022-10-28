@@ -23,7 +23,7 @@ public class UserController {
     public Response<UserJoinResponse> join(@RequestBody UserJoinRequest request) {
         // join
         User user = userService.join(request.getUserName(), request.getPassword()); // UserJoinRequest 로 불러온 userName 과 password 를 userService 로 넘김
-        //UserJoinResponse response = UserJoinResponse.fromUser(user); // 아래 코드에 포함
+        //UserJoinResponse response = UserJoinResponse.fromUser(user); // 아래 코드에 포함 
         return Response.success(UserJoinResponse.fromUser(user));
     }
 }
