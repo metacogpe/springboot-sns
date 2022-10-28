@@ -18,6 +18,6 @@ public class GlobalControllerAdvice {
 
         log.error("Errors occurs {}", e.toString());
         return ResponseEntity.status(e.getErrorCode().getStatus())
-                .body(Response.error(e.getErrorCode().name()))
+                .body(Response.error(e.getErrorCode().name()));
     }
 }
