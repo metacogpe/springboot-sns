@@ -35,11 +35,11 @@ public class UserService {
     // todo : implement
     public String login(String userName, String password) {
         // 회원가입 여부 체크 : userName 존재하는 경우 userEntity 로 반환 ( 또는 존재하지 않는 경우 예외처리 )
-        UserEntity userEntity = userEntityRepository.findByUsername(userName).orElseThrow(() -> new SnsApplicationException());
+        UserEntity userEntity = userEntityRepository.findByUsername(userName).orElseThrow(() -> new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME,""));
 
         // 비밀번호 체크 : 로그인 시 입력받은 패스워드와 등록된 패스워드가 다를 경우 예외 처리
         if(!userEntity.getPassword().equals(password)) {
-            throw new SnsApplicationException();  // 패스워드 일치하지 않으면 예외처리 : SnsApplicationException()
+            throw new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME, "");  // 패스워드 일치하지 않으면 예외처리 : SnsApplicationException()
         }
         // 토큰 생성
 
